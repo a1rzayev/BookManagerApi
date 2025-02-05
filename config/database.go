@@ -1,9 +1,11 @@
 package config
 
 import (
+	"book-manager-api/models"
+	"log"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"log"
 )
 
 var DB *gorm.DB
