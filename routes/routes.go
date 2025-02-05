@@ -8,7 +8,11 @@ import (
 func SetupRoutes(r *gin.Engine) {
 	r.POST("/signup", controllers.Signup)
 	r.POST("/login", controllers.Login)
-	r.POST("/books", controllers.CreateBook)
-	r.GET("/books", controllers.GetBooks)
-	r.DELETE("/books/:id", controllers.DeleteBook)
+	protected := r.Group("/")
+	protected.Use(middlewares.AuthMiddleware())
+	{
+		protected.POST("/books", controllers.CreateBook)
+		protected.GET("/books", controllers.GetBooks)
+		protected.DELETE("/books/:id", controllers.DeleteBook)
+	}
 }
